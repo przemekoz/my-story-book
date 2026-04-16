@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
   const result = await client.images.generate({
     // model: "gpt-image-1",
-    prompt: prompt,
+    prompt: "cat astronaut",
     size: "1024x1024",
   });
   return result?.data ? result.data[0].url : "";
