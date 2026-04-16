@@ -8,6 +8,6 @@ export default async function handler(req, res) {
     body: { prompt: "cat astronaut" },
   });
 
-  const data = await JSON.parse(response);
+  const data = await response.json(response);
   res.status(200).json(data);
 }
