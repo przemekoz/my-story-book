@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const { prompt } = req.body || {};
 
     const result = await client.images.generate({
-      // model: "gpt-image-1",
+      model: "gpt-image-1",
       prompt: prompt || "cat astronaut",
       size: "1024x1024",
     });
