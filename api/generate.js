@@ -17,8 +17,10 @@ export default async function handler(req, res) {
       size: "1024x1024",
     });
 
+    const imageBase64 = result.data[0].b64_json;
+
     return res.status(200).json({
-      image: result.data[0].url,
+      image: `data:image/png;base64,${imageBase64}`,
     });
   } catch (error) {
     console.error(error);
