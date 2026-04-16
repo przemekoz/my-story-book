@@ -17,7 +17,7 @@ import OpenAI from "openai";
 
 export default async function handler(req, res) {
   const client = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_KEY,
+    apiKey: process.env.VITE_OPENAI_KEY,
     dangerouslyAllowBrowser: true,
   });
 
