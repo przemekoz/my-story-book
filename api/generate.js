@@ -10,6 +10,7 @@ export default async function handler(req, res) {
 
   const response = {
     message: "OK",
+    env: process.env,
   };
 
   //   const data = await JSON.parse(response);
