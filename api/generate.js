@@ -12,6 +12,6 @@ export default async function handler(req, res) {
     message: "OK",
   };
 
-  const data = await response.json();
+  const data = await JSON.parse(response);
   res.status(200).json(data);
 }
