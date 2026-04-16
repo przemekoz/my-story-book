@@ -1,0 +1,84 @@
+@import url("variables.css");
+@import url("button.css");
+@import url("header.css");
+@import url("footer.css");
+@import url("spinner.css");
+@import url("flex.css");
+@import url("formCard.css");
+@import url("spacing.css");
+
+/* ------- Base Style ------- */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  width: 80%;
+  max-width: 850px;
+}
+  
+h1 {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.question-container {
+  h3 {
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-md);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+.image-my-books {
+  margin: var(--spacing-xl) 0;
+}
+
+/* ------- Spacing ------- */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+
+.background-light-pink {
+  background: var(--color-light-pink);
+}
+
+.border-radius-md {
+  border-radius: var(--border-radius-md);
+}
+
+.box-shadow-container {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.general-image {
+  border-radius: 5px;
+}
+
+.auth-buttons {
+  width: 100px;
+}
+
+.auth-fields {
+  width: 200px;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+}
+
+.auth-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}

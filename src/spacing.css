@@ -1,0 +1,7 @@
+.padding-lg {
+    padding: var(--spacing-lg);
+}
+
+.margin-lg {
+    margin: var(--spacing-lg);
+}

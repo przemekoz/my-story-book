@@ -1,0 +1,36 @@
+/* ------- Form Container ------- */
+.form-card {
+  box-sizing: border-box;
+  margin-bottom: var(--spacing-xl);
+  min-height: 500px;
+}
+
+/* ------- Form Labels ------- */
+.form-card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+/* ------- Inputs / Select / Textarea ------- */
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 90%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d0d7de;
+  border-radius: var(--border-radius-sm);
+  background: #fff;
+  transition: 0.2s border, 0.2s box-shadow;
+  outline: none;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}

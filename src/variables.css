@@ -1,0 +1,27 @@
+:root {
+    /* colors */
+    --color-light-pink: #FFF5EE;
+
+    /* font-color */
+
+    /* radius */
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+
+    /* font-size */
+    --font-size-sm: 0.75rem;
+    --line-height-sm: 0.85rem;
+
+    --font-size-md: 1rem;
+    --line-height-md: 1.1rem;
+
+    --font-size-lg: 1.25rem;
+    --line-height-lg: 1.35rem;
+
+
+    /* spacing */
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 5rem;
+}

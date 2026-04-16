@@ -1,0 +1,29 @@
+header {
+  top: 0;
+  left: 0;
+  position: relative;
+  width: 100%;
+  height: 79px;
+  background: url("/public/logo.png") left no-repeat #262639;
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 225px;
+    height: 79px;
+    color: white;
+    a {
+      color: white;
+      text-decoration: none;
+      margin-right: 30px;
+    }
+    a:first-child {
+      left: 0;
+      top: 0;
+      position: absolute;
+      display: block;
+      width: 225px;
+      height: 79px;
+    }
+  }
+}
