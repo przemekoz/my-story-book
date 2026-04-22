@@ -4,122 +4,59 @@ import { HomePage } from "./pages/HomePage";
 import { AboutPage } from "./pages/AboutPage";
 import { CreateBookPage } from "./pages/CreateBookPage";
 import { ImagePreviewPage } from "./pages/ImagePreviewPage";
-
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import {
-//   createUserWithEmailAndPassword,
-//   getAuth,
-//   onAuthStateChanged,
-//   signInWithEmailAndPassword,
-//   signOut,
-// } from "firebase/auth";
-// import { useRef, useState } from "react";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCCttlqMp0bJwkDEwptBMA4Ex9NHa6MqVs",
-//   authDomain: "my-story-book-3719f.firebaseapp.com",
-//   projectId: "my-story-book-3719f",
-//   storageBucket: "my-story-book-3719f.firebasestorage.app",
-//   messagingSenderId: "95629313040",
-//   appId: "1:95629313040:web:33709f3df43138a0b8b695",
-// };
-
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
+import { useRef, useState } from "react";
 
 export default function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const login = useRef<HTMLInputElement | null>(null);
-  // const password = useRef<HTMLInputElement | null>(null);
+  const login = useRef<HTMLInputElement | null>(null);
+  const password = useRef<HTMLInputElement | null>(null);
 
-  // const onLogin = async () => {
-  //   try {
-  //     console.log("--", login.current?.value, password.current?.value);
-  //     if (login.current?.value && password.current?.value) {
-  //       await signInWithEmailAndPassword(
-  //         auth,
-  //         login.current?.value,
-  //         password.current?.value,
-  //       );
-  //       setIsLoggedIn(true);
-  //     }
-  //   } catch {
-  //     setIsLoggedIn(false);
-  //   }
-  // };
+  const onLogin = async () => {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login: login.current,
+        password: password.current,
+      }),
+    });
 
-  // const onSignUp = async () => {
-  //   try {
-  //     console.log("--", login.current?.value, password.current?.value);
-  //     if (login.current?.value && password.current?.value) {
-  //       await createUserWithEmailAndPassword(
-  //         auth,
-  //         login.current?.value,
-  //         password.current?.value,
-  //       );
-  //     }
-  //   } catch {}
-  // };
+    const data = await response.json();
+    if (data.status === "ok") {
+      setIsLoggedIn(true);
+    }
+  };
 
-  // const onSignOut = async () => {
-  //   await signOut(auth);
-  // };
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     console.log("Logged in as: " + user.email);
-  //     setIsLoggedIn(true);
-
-  //     const allowed = [
-  //       "przemekkozinski@gmail.com",
-  //       "katharina.volkmer@gmail.com",
-  //     ];
-  //     if (!allowed.includes(user.email ?? "")) {
-  //       console.log("Access denied");
-  //       setIsLoggedIn(false);
-  //     }
-  //   } else {
-  //     console.log("Not logged in");
-  //     setIsLoggedIn(false);
-  //   }
-  // });
-
-  // if (!isLoggedIn) {
-  //   return (
-  //     <>
-  //       <header></header>
-  //       <div className="auth-container">
-  //         <h2>Login</h2>
-  //         <input
-  //           className="auth-fields"
-  //           ref={login}
-  //           type="email"
-  //           placeholder="Email"
-  //         />
-  //         <br />
-  //         <input
-  //           className="auth-fields"
-  //           ref={password}
-  //           type="password"
-  //           placeholder="Password"
-  //         />
-  //         <br />
-  //         <button className="auth-buttons" onClick={onLogin}>
-  //           Login
-  //         </button>
-  //         <button className="auth-buttons" onClick={onSignUp}>
-  //           Sign Up
-  //         </button>
-  //       </div>
-  //     </>
-  //   );
-  // }
+  if (!isLoggedIn) {
+    return (
+      <>
+        <header></header>
+        <div className="auth-container">
+          <h2>Login</h2>
+          <input
+            className="auth-fields"
+            ref={login}
+            type="email"
+            placeholder="Email"
+          />
+          <br />
+          <input
+            className="auth-fields"
+            ref={password}
+            type="password"
+            placeholder="Password"
+          />
+          <br />
+          <button className="auth-buttons" onClick={onLogin}>
+            Login
+          </button>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
