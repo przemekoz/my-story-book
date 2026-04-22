@@ -13,14 +13,19 @@ export default function App() {
   const password = useRef<HTMLInputElement | null>(null);
 
   const onLogin = async () => {
+    console.log({
+      login: login.current?.value,
+      password: password.current?.value,
+    });
+
     const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        login: login.current,
-        password: password.current,
+        login: login.current?.value,
+        password: password.current?.value,
       }),
     });
 
