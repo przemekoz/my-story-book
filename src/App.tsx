@@ -74,11 +74,6 @@ export default function App() {
           <Link to="/create-book">Resources</Link>
           <Link to="/create-book">Pricing</Link>
           <Link to="/models">Models</Link>
-          {/* 
-          <button className="auth-buttons" onClick={onSignOut}>
-            Log out
-          </button>
-          */}
         </nav>
       </header>
 
