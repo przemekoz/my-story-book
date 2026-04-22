@@ -5,6 +5,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { CreateBookPage } from "./pages/CreateBookPage";
 import { ImagePreviewPage } from "./pages/ImagePreviewPage";
 import { useRef, useState } from "react";
+import { ModelsPage } from "./pages/ModelsPage";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -72,6 +73,7 @@ export default function App() {
           <Link to="/about">Our story</Link>
           <Link to="/create-book">Resources</Link>
           <Link to="/create-book">Pricing</Link>
+          <Link to="/models">Models</Link>
           {/* 
           <button className="auth-buttons" onClick={onSignOut}>
             Log out
@@ -87,6 +89,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/create-book" element={<CreateBookPage />} />
             <Route path="/image-preview" element={<ImagePreviewPage />} />
+            <Route path="/models" element={<ModelsPage />} />
           </Routes>
         </div>
 
