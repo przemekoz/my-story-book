@@ -13,7 +13,7 @@ export default function App() {
   const password = useRef<HTMLInputElement | null>(null);
 
   const onLogin = async () => {
-    const response = await fetch("/api/generate", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
