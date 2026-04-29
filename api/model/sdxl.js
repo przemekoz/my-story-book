@@ -6,9 +6,9 @@ export default async function handler(req, res) {
 
     // const { prompt, image } = JSON.parse(req.body);
 
+    console.log("formData:", req);
     const formData = await req.formData();
 
-    console.log("formData:", req);
     const prompt = formData.get("prompt");
     const image = formData.get("image");
 
