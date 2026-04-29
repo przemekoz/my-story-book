@@ -9,14 +9,12 @@ export default async function handler(req, res) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    console.log(`dalle prompt:`, req.body);
     const { prompt } = JSON.parse(req.body);
-    console.log(`dalle prompt:`, prompt);
 
     const result = await client.images.generate({
       model: "gpt-image-1",
       prompt,
-      size: "512x512",
+      size: "1024x1024",
     });
 
     const imageBase64 = result.data[0].b64_json;

@@ -4,7 +4,6 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    console.log(`sdxl prompt:`, req.body);
     const { prompt, image } = JSON.parse(req.body);
     console.log(`sdxl prompt:`, prompt, image);
 
