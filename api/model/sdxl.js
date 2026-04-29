@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     }
 
     console.log(`sdxl prompt:`, req.body);
-    const { prompt, image } = req.body;
+    const { prompt, image } = JSON.parse(req.body);
     console.log(`sdxl prompt:`, prompt, image);
 
     // upload image to temporary base64
