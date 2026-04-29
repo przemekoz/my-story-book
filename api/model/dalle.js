@@ -11,9 +11,10 @@ export default async function handler(req, res) {
 
     const { prompt } = req.body || {};
 
+    console.log(`dalle prompt:`, prompt);
     const result = await client.images.generate({
       model: "gpt-image-1",
-      prompt: prompt,
+      prompt,
       size: "512x512",
     });
 

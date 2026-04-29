@@ -4,16 +4,16 @@ import { useState } from "react";
 
 export const ModelsPage = () => {
   const [image, setImage] = useState(null);
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState("cat astronaut");
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
-    if (!image || !prompt) return;
+    if (!prompt) return;
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", image ?? "");
     formData.append("prompt", prompt);
 
     const models = ["dalle", "sdxl"];

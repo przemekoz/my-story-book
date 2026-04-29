@@ -4,9 +4,9 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const formData = await req.formData();
-    const prompt = formData.get("prompt");
-    const image = formData.get("image");
+    const { prompt, image } = req.body || {};
+
+    console.log(`sdxl prompt:`, prompt, image);
 
     // upload image to temporary base64
     const buffer = Buffer.from(await image.arrayBuffer());
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         version: "stability-ai/sdxl", // use latest version ID in real app
         input: {
-          prompt: prompt,
+          prompt,
           image: base64,
           strength: 0.7,
           width: 512,
