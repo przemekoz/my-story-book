@@ -4,7 +4,9 @@ import { useState } from "react";
 
 export const ModelsPage = () => {
   const [image, setImage] = useState(null);
-  const [prompt, setPrompt] = useState("cat astronaut");
+  const [prompt, setPrompt] = useState(
+    "happy childhood background in cartoon shape",
+  );
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
 

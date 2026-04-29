@@ -4,6 +4,14 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
+    const formData = await req.formData();
+
+    const prompt = formData.get("prompt");
+    const image = formData.get("image");
+
+    console.log("Prompt:", prompt);
+    console.log("Image:", image);
+
     console.log(`sdxl prompt:`, req.body);
     const { prompt, image } = req.body || {};
     console.log(`sdxl prompt:`, prompt, image);
