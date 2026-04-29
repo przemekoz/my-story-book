@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
     const formData = await req.formData();
 
-    console.log("formData:", formData);
+    console.log("formData:", req);
     const prompt = formData.get("prompt");
     const image = formData.get("image");
 
