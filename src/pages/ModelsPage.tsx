@@ -42,7 +42,12 @@ export const ModelsPage = () => {
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
 
-      <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+      <input
+        type="file"
+        onChange={(e: any) => {
+          setImage(e.target.files[0]);
+        }}
+      />
 
       <textarea
         placeholder="Enter prompt..."
@@ -59,7 +64,7 @@ export const ModelsPage = () => {
         {Object.entries(results).map(([model, url]) => (
           <div key={model}>
             <h3>{model}</h3>
-            <img src={url} width={256} alt="generated image" />
+            <img src={url as string} width={256} alt="generated" />
           </div>
         ))}
       </div>
