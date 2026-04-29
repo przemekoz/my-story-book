@@ -1,39 +1,25 @@
-import Busboy from "busboy";
-
 export default async function handler(req, res) {
   try {
     if (req.method !== "POST") {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const busboy = Busboy({ headers: req.headers });
+    // const { prompt, image } = JSON.parse(req.body);
 
-    let prompt = "";
-    let fileBuffer = null;
-    let mimeType = "";
+    console.log("formData:", req);
+    // const formData = await req.formData();
 
-    const chunks = [];
+    // const prompt = formData.get("prompt");
+    // const image = formData.get("image");
 
-    busboy.on("file", (fieldname, file, info) => {
-      mimeType = info.mimeType;
+    // console.log("Prompt:", prompt);
+    // console.log("Image:", image);
 
-      file.on("data", (data) => {
-        chunks.push(data);
-      });
+    // upload image to temporary base64
+    // const buffer = Buffer.from(await image.arrayBuffer());
+    // const base64 = `data:image/png;base64,${buffer.toString("base64")}`;
 
-      file.on("end", () => {
-        fileBuffer = Buffer.concat(chunks);
-      });
-    });
-
-    busboy.on("field", (name, value) => {
-      if (name === "prompt") prompt = value;
-    });
-
-    busboy.on("finish", () => {
-      const base64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
-
-      const response = await fetch("https://api.replicate.com/v1/predictions", {
+    const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
         Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
@@ -72,7 +58,6 @@ export default async function handler(req, res) {
 
     return Response.json({
       image: result.output[0],
-    });
     });
   } catch (error) {
     console.error(error);
