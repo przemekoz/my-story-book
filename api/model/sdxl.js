@@ -1,4 +1,4 @@
-import Busboy from "busboy";
+const Busboy = require("busboy");
 
 export default async function handler(req, res) {
   try {
