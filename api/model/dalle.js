@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     });
 
     console.log(`dalle prompt:`, req.body);
-    const { prompt } = req.body || {};
+    const { prompt } = req.body;
     console.log(`dalle prompt:`, prompt);
 
     const result = await client.images.generate({
