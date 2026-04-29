@@ -12,17 +12,16 @@ export const ModelsPage = () => {
     if (!prompt) return;
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("image", image ?? "");
-    formData.append("prompt", prompt);
-
     const models = ["dalle", "sdxl"];
 
     const responses = await Promise.all(
       models.map(async (model) => {
         const res = await fetch(`/api/model/${model}`, {
           method: "POST",
-          body: formData,
+          body: JSON.stringify({
+            prompt,
+            image,
+          }),
         });
         const data = await res.json();
         return { model, ...data };
