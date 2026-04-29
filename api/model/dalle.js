@@ -9,9 +9,9 @@ export default async function handler(req, res) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const { prompt } = req.body || {};
+    console.log(`dalle prompt:`, req.formData);
+    const { prompt } = req.formData || {};
 
-    console.log(`dalle prompt:`, prompt);
     const result = await client.images.generate({
       model: "gpt-image-1",
       prompt,
