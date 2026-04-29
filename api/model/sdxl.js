@@ -7,17 +7,17 @@ export default async function handler(req, res) {
     // const { prompt, image } = JSON.parse(req.body);
 
     console.log("formData:", req);
-    const formData = await req.formData();
+    // const formData = await req.formData();
 
-    const prompt = formData.get("prompt");
-    const image = formData.get("image");
+    // const prompt = formData.get("prompt");
+    // const image = formData.get("image");
 
-    console.log("Prompt:", prompt);
-    console.log("Image:", image);
+    // console.log("Prompt:", prompt);
+    // console.log("Image:", image);
 
     // upload image to temporary base64
-    const buffer = Buffer.from(await image.arrayBuffer());
-    const base64 = `data:image/png;base64,${buffer.toString("base64")}`;
+    // const buffer = Buffer.from(await image.arrayBuffer());
+    // const base64 = `data:image/png;base64,${buffer.toString("base64")}`;
 
     const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
