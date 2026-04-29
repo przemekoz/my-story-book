@@ -4,8 +4,16 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { prompt, image } = JSON.parse(req.body);
-    console.log(`sdxl prompt:`, prompt, image);
+    // const { prompt, image } = JSON.parse(req.body);
+
+    const formData = await req.formData();
+
+    console.log("formData:", formData);
+    const prompt = formData.get("prompt");
+    const image = formData.get("image");
+
+    console.log("Prompt:", prompt);
+    console.log("Image:", image);
 
     // upload image to temporary base64
     const buffer = Buffer.from(await image.arrayBuffer());

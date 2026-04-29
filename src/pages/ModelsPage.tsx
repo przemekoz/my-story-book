@@ -3,7 +3,7 @@ import { Record } from "openai/internal/builtin-types";
 import { useState } from "react";
 
 export const ModelsPage = () => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<Blob | string>("");
   const [prompt, setPrompt] = useState(
     "happy childhood background in cartoon shape",
   );
@@ -16,14 +16,16 @@ export const ModelsPage = () => {
 
     const models = ["dalle", "sdxl"];
 
+    const formData = new FormData();
+
+    formData.append("image", image);
+    formData.append("prompt", prompt);
+
     const responses = await Promise.all(
       models.map(async (model) => {
         const res = await fetch(`/api/model/${model}`, {
           method: "POST",
-          body: JSON.stringify({
-            prompt,
-            image,
-          }),
+          body: formData,
         });
         const data = await res.json();
         return { model, ...data };
@@ -65,7 +67,7 @@ export const ModelsPage = () => {
         {Object.entries(results).map(([model, url]) => (
           <div key={model}>
             <h3>{model}</h3>
-            <img src={url as string} width={256} alt="generated" />
+            <img src={url as string} width={512} alt="generated" />
           </div>
         ))}
       </div>
