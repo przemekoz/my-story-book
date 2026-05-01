@@ -1,33 +1,31 @@
 const OpenAI = require("openai");
 
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 module.exports = async function handler(req, res) {
   try {
-
     if (req.method !== "POST") {
-      return res.status(405).end()
+      return res.status(405).end();
     }
-    
-    const busboy = Busboy({ headers: req.headers })
 
-    let prompt = ""
+    const busboy = Busboy({ headers: req.headers });
+
+    let prompt = "";
 
     // handle text fields
     busboy.on("field", (name, value) => {
       if (name === "prompt") {
-        prompt = value
+        prompt = value;
       }
-    })
+    });
 
     // when done
-    busboy.on("finish", () => {
-      console.log("Prompt:", prompt)
-
+    busboy.on("finish", async () => {
+      console.log("Prompt:", prompt);
 
       if (prompt) {
-        const client = new OpenAI({
-          apiKey: process.env.OPENAI_API_KEY,
-        });
-
         const result = await client.images.generate({
           model: "gpt-image-1",
           prompt,
@@ -40,14 +38,13 @@ module.exports = async function handler(req, res) {
           image: `data:image/png;base64,${imageBase64}`,
         });
       }
-    })
+    });
 
-    req.pipe(busboy)
-
+    req.pipe(busboy);
   } catch (error) {
     console.error(error);
     return res.status(500).json({
       error: "Dalle Image generation failed",
     });
   }
-}
+};
