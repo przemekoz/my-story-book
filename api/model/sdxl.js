@@ -54,22 +54,24 @@ module.exports = async function handler(req, res) {
 
       const prediction = await response.json();
 
+      console.log("response", response, prediction);
+
       // polling (simple version)
-      let result = prediction;
-      while (result.status !== "succeeded" && result.status !== "failed") {
-        await new Promise((r) => setTimeout(r, 1500));
+      // let result = prediction;
+      // while (result.status !== "succeeded" && result.status !== "failed") {
+      //   await new Promise((r) => setTimeout(r, 1000));
 
-        const poll = await fetch(
-          `https://api.replicate.com/v1/predictions/${prediction.id}`,
-          {
-            headers: {
-              Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-            },
-          },
-        );
+      //   const poll = await fetch(
+      //     `https://api.replicate.com/v1/predictions/${prediction.id}`,
+      //     {
+      //       headers: {
+      //         Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+      //       },
+      //     },
+      //   );
 
-        result = await poll.json();
-      }
+      //   result = await poll.json();
+      // }
 
       res.status(200).json({
         image: result.output[0],

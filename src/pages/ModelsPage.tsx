@@ -5,7 +5,7 @@ import { useState } from "react";
 export const ModelsPage = () => {
   const [image, setImage] = useState<Blob | string>("");
   const [prompt, setPrompt] = useState(
-    "happy childhood background in cartoon shape",
+    "a cute child character, illustrated in a children's book style, soft watercolor, pastel colors, clean outlines, disney style",
   );
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
