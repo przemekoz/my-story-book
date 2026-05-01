@@ -12,28 +12,31 @@ module.exports = async function handler(req, res) {
     let fileBuffer = null;
     let mimeType = "";
 
-    const chunks = [];
+    // const chunks = [];
 
-    busboy.on("file", (fieldname, file, info) => {
-      mimeType = info.mimeType;
+    // busboy.on("file", (fieldname, file, info) => {
+    //   mimeType = info.mimeType;
 
-      file.on("data", (data) => {
-        chunks.push(data);
-      });
+    //   file.on("data", (data) => {
+    //     chunks.push(data);
+    //   });
 
-      file.on("end", () => {
-        fileBuffer = Buffer.concat(chunks);
-      });
-    });
+    //   file.on("end", () => {
+    //     fileBuffer = Buffer.concat(chunks);
+    //   });
+    // });
 
     busboy.on("field", (name, value) => {
-      if (name === "prompt") prompt = value;
+      if (name === "prompt") {
+        prompt = value;
+      }
     });
 
-    busboy.on("finish", async () => {
-      const base64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
+    busboy.on("finish", () => {
+      // const base64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
 
-      console.log("image", base64);
+      // console.log("image", base64);
+      console.log("prompt", prompt);
 
       // const response = await fetch("https://api.replicate.com/v1/predictions", {
       //   method: "POST",
@@ -81,6 +84,8 @@ module.exports = async function handler(req, res) {
         message: "ok",
       });
     });
+
+    req.pipe(busboy);
   } catch (error) {
     console.error(error);
     return res.status(500).json({
