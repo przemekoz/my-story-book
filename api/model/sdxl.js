@@ -37,8 +37,11 @@ module.exports = async function handler(req, res) {
     // when done
     busboy.on("finish", async () => {
       if (prompt) {
-        const base64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
+        const base64 = fileBuffer
+          ? `data:${mimeType};base64,${fileBuffer.toString("base64")}`
+          : "";
         console.log("prompt", prompt);
+        console.log("base64", base64);
 
         const response = await fetch(
           "https://api.replicate.com/v1/predictions",
