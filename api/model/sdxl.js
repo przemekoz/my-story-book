@@ -33,6 +33,8 @@ module.exports = async function handler(req, res) {
     busboy.on("finish", async () => {
       const base64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
 
+      console.log("image", base64);
+
       const response = await fetch("https://api.replicate.com/v1/predictions", {
         method: "POST",
         headers: {
@@ -52,9 +54,10 @@ module.exports = async function handler(req, res) {
         }),
       });
 
+      console.log("response", response);
       const prediction = await response.json();
 
-      console.log("response", response, prediction);
+      console.log("prediction", prediction);
 
       // polling (simple version)
       // let result = prediction;
@@ -74,7 +77,8 @@ module.exports = async function handler(req, res) {
       // }
 
       res.status(200).json({
-        image: result.output[0],
+        // image: result.output[0],
+        message: "ok",
       });
     });
   } catch (error) {
