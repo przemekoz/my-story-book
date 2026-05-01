@@ -15,15 +15,16 @@ module.exports = async function handler(req, res) {
     const chunks = [];
 
     busboy.on("file", (fieldname, file, info) => {
-      mimeType = info.mimeType;
+      console.log("1", fieldname, file, info);
+      // mimeType = info.mimeType;
 
-      file.on("data", (data) => {
-        chunks.push(data);
-      });
+      // file.on("data", (data) => {
+      //   chunks.push(data);
+      // });
 
-      file.on("end", () => {
-        fileBuffer = Buffer.concat(chunks);
-      });
+      // file.on("end", () => {
+      //   fileBuffer = Buffer.concat(chunks);
+      // });
     });
 
     // handle text fields
