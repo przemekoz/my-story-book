@@ -14,7 +14,8 @@ export const ModelsPage = () => {
     if (!prompt) return;
     setLoading(true);
 
-    const models = ["dalle", "sdxl"];
+    // const models = ["dalle", "sdxl"];
+    const models = ["sdxl"];
 
     const formData = new FormData();
 
