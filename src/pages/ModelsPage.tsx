@@ -21,16 +21,16 @@ export const ModelsPage = () => {
     formData.append("image", image);
     formData.append("prompt", prompt);
 
-    const responses = await Promise.all(
-      models.map(async (model) => {
-        const res = await fetch(`/api/model/${model}`, {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-        return { model, ...data };
-      }),
-    );
+    const responses = [];
+    for (const model of models) {
+      const res = await fetch(`/api/model/${model}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      responses.push({ model, ...data });
+      await new Promise((r) => setTimeout(r, 2000));
+    }
 
     const mapped: Record<string, string> = {};
     responses.forEach((r) => {
