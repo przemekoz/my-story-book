@@ -3,9 +3,11 @@ import { Record } from "openai/internal/builtin-types";
 import { useState } from "react";
 
 export const ModelsPage = () => {
-  const [image, setImage] = useState<Blob | string>("");
   const [prompt, setPrompt] = useState(
     "a cute child character, illustrated in a children's book style, soft watercolor, pastel colors, clean outlines, disney style",
+  );
+  const [negativePrompt, setNegativePrompt] = useState(
+    "realistic, photo, ugly, distorted",
   );
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
@@ -18,8 +20,8 @@ export const ModelsPage = () => {
 
     const formData = new FormData();
 
-    formData.append("image", image);
     formData.append("prompt", prompt);
+    formData.append("negativePrompt", negativePrompt);
 
     const responses = [];
     for (const model of models) {
@@ -51,28 +53,38 @@ export const ModelsPage = () => {
         alt="Kojak's face"
         width="256"
       />
-      {/* <input
-        type="file"
-        onChange={(e: any) => {
-          setImage(e.target.files[0]);
-        }}
-      /> */}
+      <b>Prompt:</b>
+      <br />
       <textarea
         placeholder="Enter prompt..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         style={{ width: "100%", height: 100 }}
       />
+      <b>Negative prompt:</b>
+      <br />
+      <textarea
+        placeholder="Enter negative prompt..."
+        value={negativePrompt}
+        onChange={(e) => setNegativePrompt(e.target.value)}
+        style={{ width: "100%", height: 100 }}
+        rows={2}
+      />
       <button onClick={handleGenerate} disabled={loading}>
         {loading ? "Generating..." : "Generate"}
       </button>
-      <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
+      <div
+        style={{
+          display: "flex",
+          gap: 20,
+          marginTop: 20,
+          flexDirection: "column",
+        }}
+      >
         {Object.entries(results).map(([model, url]) => (
           <div key={model}>
             <h3>{model}</h3>
             <img src={url as string} width={512} alt="generated" />
-            <br />
-            <br />
           </div>
         ))}
       </div>

@@ -9,22 +9,13 @@ module.exports = async function handler(req, res) {
     const busboy = Busboy({ headers: req.headers });
 
     let prompt = "";
-    let fileBuffer = null;
-    let mimeType = "";
+    let negativePrompt = "";
 
-    const chunks = [];
-
-    busboy.on("file", (fieldname, file, info) => {
-      console.log("1", fieldname, file, info);
-      mimeType = info.mimeType;
-
-      file.on("data", (data) => {
-        chunks.push(data);
-      });
-
-      file.on("end", () => {
-        fileBuffer = Buffer.concat(chunks);
-      });
+    // handle text fields
+    busboy.on("field", (name, value) => {
+      if (name === "negativePrompt") {
+        negativePrompt = value;
+      }
     });
 
     // handle text fields
@@ -37,10 +28,8 @@ module.exports = async function handler(req, res) {
     // when done
     busboy.on("finish", async () => {
       if (prompt) {
-        const base64 = fileBuffer
-          ? `data:${mimeType};base64,${fileBuffer.toString("base64")}`
-          : "";
         console.log("prompt", prompt);
+        console.log("negativePrompt", negativePrompt);
 
         const response = await fetch(
           "https://api.replicate.com/v1/predictions",
@@ -57,7 +46,7 @@ module.exports = async function handler(req, res) {
                   "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
                 ],
                 prompt,
-                negative_prompt: "realistic, photo, ugly, distorted",
+                negative_prompt: negativePrompt,
                 num_inference_steps: 30,
                 guidance_scale: 7.5,
               },
