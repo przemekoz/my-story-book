@@ -15,7 +15,7 @@ export const ModelsPage = () => {
     setLoading(true);
 
     // const models = ["dalle", "sdxl"];
-    const models = ["sdxl"];
+    const models = ["fofr-face-to-many"];
 
     const formData = new FormData();
 
@@ -45,25 +45,27 @@ export const ModelsPage = () => {
   return (
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
-
-      <input
+      hardcoded image:
+      <img
+        src="https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg"
+        alt="Kojak's face"
+        width="256"
+      />
+      {/* <input
         type="file"
         onChange={(e: any) => {
           setImage(e.target.files[0]);
         }}
-      />
-
+      /> */}
       <textarea
         placeholder="Enter prompt..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         style={{ width: "100%", height: 100 }}
       />
-
       <button onClick={handleGenerate} disabled={loading}>
         {loading ? "Generating..." : "Generate"}
       </button>
-
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
         {Object.entries(results).map(([model, url]) => (
           <div key={model}>

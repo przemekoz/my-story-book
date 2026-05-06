@@ -41,29 +41,6 @@ module.exports = async function handler(req, res) {
           ? `data:${mimeType};base64,${fileBuffer.toString("base64")}`
           : "";
         console.log("prompt", prompt);
-        console.log("base64", base64);
-
-        // const response = await fetch(
-        //   "https://api.replicate.com/v1/predictions",
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       version:
-        //         "7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc",
-        //       input: {
-        //         prompt,
-        //         imageUrl:
-        //           "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
-        //         width: 512,
-        //         height: 512,
-        //       },
-        //     }),
-        //   },
-        // );
 
         const response = await fetch(
           "https://api.replicate.com/v1/predictions",
@@ -79,7 +56,7 @@ module.exports = async function handler(req, res) {
               input: {
                 image:
                   "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
-                prompt: `${prompt}, children's book illustration, watercolor, soft colors, cute character`,
+                prompt,
                 negative_prompt: "realistic, photo, ugly, distorted",
                 num_inference_steps: 30,
                 guidance_scale: 7.5,
