@@ -14,8 +14,7 @@ export const ModelsPage = () => {
     if (!prompt) return;
     setLoading(true);
 
-    // const models = ["dalle", "sdxl"];
-    const models = ["fofr-face-to-many"];
+    const models = ["fofr-face-to-many", "openai-gpt-image-2"];
 
     const formData = new FormData();
 
@@ -45,7 +44,8 @@ export const ModelsPage = () => {
   return (
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
-      hardcoded image:
+      Original (uploaded) image:
+      <br />
       <img
         src="https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg"
         alt="Kojak's face"
@@ -71,6 +71,8 @@ export const ModelsPage = () => {
           <div key={model}>
             <h3>{model}</h3>
             <img src={url as string} width={512} alt="generated" />
+            <br />
+            <br />
           </div>
         ))}
       </div>
