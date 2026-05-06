@@ -46,13 +46,15 @@ export const ModelsPage = () => {
   return (
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
-      Original (uploaded) image:
+      <b>Original (uploaded) image:</b>
       <br />
       <img
         src="https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg"
         alt="Kojak's face"
         width="256"
       />
+      <br />
+      <br />
       <b>Prompt:</b>
       <br />
       <textarea

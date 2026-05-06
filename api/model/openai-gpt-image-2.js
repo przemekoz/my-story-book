@@ -46,6 +46,7 @@ module.exports = async function handler(req, res) {
                   "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
                 ],
                 prompt,
+                quality: "low",
                 negative_prompt: negativePrompt,
                 num_inference_steps: 30,
                 guidance_scale: 7.5,
