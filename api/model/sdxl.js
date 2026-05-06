@@ -43,6 +43,28 @@ module.exports = async function handler(req, res) {
         console.log("prompt", prompt);
         console.log("base64", base64);
 
+        // const response = await fetch(
+        //   "https://api.replicate.com/v1/predictions",
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       version:
+        //         "7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc",
+        //       input: {
+        //         prompt,
+        //         imageUrl:
+        //           "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
+        //         width: 512,
+        //         height: 512,
+        //       },
+        //     }),
+        //   },
+        // );
+
         const response = await fetch(
           "https://api.replicate.com/v1/predictions",
           {
@@ -53,22 +75,46 @@ module.exports = async function handler(req, res) {
             },
             body: JSON.stringify({
               version:
-                "stability-ai/sdxl:7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc",
+                "fofr/face-to-many:a07f252abbbd832009640b27f063ea52d87d7a23a185ca165bec23b5adc8deaf",
               input: {
-                prompt,
-                image: base64,
-                strength: 0.7,
-                width: 512,
-                height: 512,
+                image:
+                  "https://lawliberty.org/app/uploads/2023/07/telly-savalas-kojak-color-5c01fb5e46e0fb000161404f-e1690400615286-1060x530.jpg",
+                prompt: `${prompt}, children's book illustration, watercolor, soft colors, cute character`,
+                negative_prompt: "realistic, photo, ugly, distorted",
+                num_inference_steps: 30,
+                guidance_scale: 7.5,
               },
             }),
           },
         );
 
-        console.log("response", response);
+        let result = await response.json();
+
+        console.log("INIT:", result);
+
+        // 👉 3. poll
+        while (result.status !== "succeeded" && result.status !== "failed") {
+          await new Promise((r) => setTimeout(r, 1500));
+
+          const poll = await fetch(
+            `https://api.replicate.com/v1/predictions/${result.id}`,
+            {
+              headers: {
+                Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+              },
+            },
+          );
+
+          result = await poll.json();
+        }
+
+        if (result.status === "failed") {
+          console.error(result);
+          return res.status(500).json({ error: "Generation failed" });
+        }
 
         return res.status(200).json({
-          image: `ok`,
+          image: result.output[0],
         });
       }
     });
