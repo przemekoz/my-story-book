@@ -42,8 +42,6 @@ export const ModelsPage = () => {
     setLoading(false);
   };
 
-  console.log(results);
-
   return (
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
@@ -93,12 +91,12 @@ export const ModelsPage = () => {
           flexDirection: "column",
         }}
       >
-        {/* {results.map((item) => (
+        {results.map((item) => (
           <div key={item.model}>
             <h3>Model: {item.model}</h3>
             <img src={item.image} width={512} alt="generated" />
           </div>
-        ))} */}
+        ))}
       </div>
     </main>
   );
