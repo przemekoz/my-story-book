@@ -40,6 +40,8 @@ export const ModelsPage = () => {
     setLoading(false);
   };
 
+  console.log(Object.entries(results), results);
+
   return (
     <main style={{ padding: 20 }}>
       <h1>AI Image Comparison</h1>
