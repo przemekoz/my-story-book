@@ -8,7 +8,9 @@ export const ModelsPage = () => {
   const [negativePrompt, setNegativePrompt] = useState(
     "realistic, photo, ugly, distorted",
   );
-  const [results, setResults] = useState({});
+  const [results, setResults] = useState<{ model: string; image: string }[]>(
+    [],
+  );
   const [loading, setLoading] = useState(false);
 
   const models = [
@@ -36,7 +38,7 @@ export const ModelsPage = () => {
     const data = await res.json();
     const response = { model, ...data };
 
-    setResults((prev) => ({ ...prev, response }));
+    setResults((prev) => [...prev, ...response]);
     setLoading(false);
   };
 
@@ -91,10 +93,10 @@ export const ModelsPage = () => {
           flexDirection: "column",
         }}
       >
-        {Object.entries(results).map(([model, url]) => (
-          <div key={model}>
-            <h3>{model}</h3>
-            <img src={url as string} width={512} alt="generated" />
+        {results.map((item) => (
+          <div key={item.model}>
+            <h3>Model: {item.model}</h3>
+            <img src={item.image} width={512} alt="generated" />
           </div>
         ))}
       </div>
