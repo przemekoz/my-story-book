@@ -36,7 +36,7 @@ export const ModelsPage = () => {
     const data = await res.json();
     const response = { model, ...data };
 
-    setResults((prev) => ({ ...prev, model: response.image }));
+    setResults((prev) => ({ ...prev, response }));
     setLoading(false);
   };
 
@@ -72,14 +72,12 @@ export const ModelsPage = () => {
       <div style={{ display: "flex", gap: ".5rem" }}>
         {models.map((model) => (
           <button
-            style={{ height: "100px", fontSize: "12px" }}
+            style={{ height: "80px", fontSize: "12px" }}
             key={model}
             onClick={() => handleGenerate(model)}
             disabled={loading}
           >
-            {loading
-              ? `Generating <b>${model}</b>... `
-              : `Generate <b>${model}</b>`}
+            {model}
           </button>
         ))}
       </div>
