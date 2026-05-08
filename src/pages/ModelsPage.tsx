@@ -38,11 +38,11 @@ export const ModelsPage = () => {
     const data = await res.json();
     const response = { model, ...data };
 
-    setResults((prev) => [...prev, ...response]);
+    setResults((prev) => prev.concat([response]));
     setLoading(false);
   };
 
-  console.log(Object.entries(results), results);
+  console.log(results);
 
   return (
     <main style={{ padding: 20 }}>
@@ -93,12 +93,12 @@ export const ModelsPage = () => {
           flexDirection: "column",
         }}
       >
-        {results.map((item) => (
+        {/* {results.map((item) => (
           <div key={item.model}>
             <h3>Model: {item.model}</h3>
             <img src={item.image} width={512} alt="generated" />
           </div>
-        ))}
+        ))} */}
       </div>
     </main>
   );
