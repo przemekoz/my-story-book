@@ -72,11 +72,14 @@ export const ModelsPage = () => {
       <div style={{ display: "flex", gap: ".5rem" }}>
         {models.map((model) => (
           <button
+            style={{ height: "100px", fontSize: "12px" }}
             key={model}
             onClick={() => handleGenerate(model)}
             disabled={loading}
           >
-            {loading ? `Generating ${model}... ` : `Generate ${model}`}
+            {loading
+              ? `Generating <b>${model}</b>... `
+              : `Generate <b>${model}</b>`}
           </button>
         ))}
       </div>
