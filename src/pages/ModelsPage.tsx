@@ -1,5 +1,4 @@
 "use client";
-import { Record } from "openai/internal/builtin-types";
 import { useState } from "react";
 
 export const ModelsPage = () => {
@@ -12,41 +11,32 @@ export const ModelsPage = () => {
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const handleGenerate = async () => {
+  const models = [
+    "fofr-face-to-many",
+    "openai-gpt-image-2",
+    "zsxkib-instant-id",
+    "zsxkib-instant-id-ipadapter-plus-face",
+    "lucataco-ip-adapter-faceid",
+    "lucataco-ip_adapter-sdxl-face",
+  ];
+
+  const handleGenerate = async (model: string) => {
     if (!prompt) return;
     setLoading(true);
-
-    const models = [
-      // "fofr-face-to-many",
-      // "openai-gpt-image-2",
-      "zsxkib-instant-id",
-      // "zsxkib-instant-id-ipadapter-plus-face",
-      // "lucataco-ip-adapter-faceid",
-      // "lucataco-ip_adapter-sdxl-face",
-    ];
 
     const formData = new FormData();
 
     formData.append("prompt", prompt);
     formData.append("negativePrompt", negativePrompt);
 
-    const responses = [];
-    for (const model of models) {
-      const res = await fetch(`/api/model/${model}`, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      responses.push({ model, ...data });
-      await new Promise((r) => setTimeout(r, 2000));
-    }
-
-    const mapped: Record<string, string> = {};
-    responses.forEach((r) => {
-      mapped[r.model] = r.image;
+    const res = await fetch(`/api/model/${model}`, {
+      method: "POST",
+      body: formData,
     });
+    const data = await res.json();
+    const response = { model, ...data };
 
-    setResults(mapped);
+    setResults((prev) => ({ ...prev, model: response.image }));
     setLoading(false);
   };
 
@@ -79,9 +69,17 @@ export const ModelsPage = () => {
         style={{ width: "100%", height: 100 }}
         rows={2}
       />
-      <button onClick={handleGenerate} disabled={loading}>
-        {loading ? "Generating..." : "Generate"}
-      </button>
+      <div style={{ display: "flex", gap: ".5rem" }}>
+        {models.map((model) => (
+          <button
+            key={model}
+            onClick={() => handleGenerate(model)}
+            disabled={loading}
+          >
+            {loading ? `Generating ${model}... ` : `Generate ${model}`}
+          </button>
+        ))}
+      </div>
       <div
         style={{
           display: "flex",
