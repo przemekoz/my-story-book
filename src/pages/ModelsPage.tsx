@@ -18,7 +18,7 @@ export const ModelsPage = () => {
     "openai-gpt-image-2",
     "zsxkib-instant-id",
     "zsxkib-instant-id-ipadapter-plus-face",
-    "lucataco-ip-adapter-faceid",
+    // "lucataco-ip-adapter-faceid", research only- not commercial use
     "lucataco-ip_adapter-sdxl-face",
   ];
 
