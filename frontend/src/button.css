@@ -1,0 +1,26 @@
+button {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  border-radius: 8px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s background, 0.2s transform;
+  height: 35px;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #aaa;
+}
+
+button:active {
+  background: #4338ca;
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #C6C6C6;
+  box-shadow: none;
+  cursor: default;
+}
