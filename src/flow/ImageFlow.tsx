@@ -216,10 +216,10 @@ ${refinement}
             <h3>Are you happy with this image?</h3>
 
             <button onClick={startRefinement}>
-              Yes, I want to change something
+              No, I want to change something
             </button>
 
-            <button onClick={acceptImage}>No, continue</button>
+            <button onClick={acceptImage}>Yes, continue</button>
           </div>
         </section>
       )}

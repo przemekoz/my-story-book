@@ -4,7 +4,7 @@ import ImageFlow from "../flow/ImageFlow";
 export const CreateBookPage = () => {
   return (
     <>
-      <CreateBook />;
+      <CreateBook />
       <ImageFlow />
     </>
   );
