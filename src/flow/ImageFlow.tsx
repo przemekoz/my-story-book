@@ -196,6 +196,8 @@ ${refinement}
         <section>
           <h2>Generating image...</h2>
 
+          {imageUrl && <img src={imageUrl} alt="Current image" width={400} />}
+
           <p>Please wait.</p>
         </section>
       )}
